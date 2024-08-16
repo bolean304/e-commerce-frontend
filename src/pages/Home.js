@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import './Home.css';  // Import the CSS file
 
 function Home() {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    axios.get('/users/productview')
+    axios.get('http://localhost:8000/users/productview')
       .then(response => {
         setProducts(response.data);
       })
@@ -16,14 +17,17 @@ function Home() {
   }, []);
 
   return (
-    <div>
-      <h1>Product List</h1>
-      <div>
+    <div className="home-container">
+      <h1 className="home-title">Product List</h1>
+      <div className="product-grid">
         {products.map(product => (
-          <div key={product._id}>
-            <h2>{product.product_name}</h2>
-            <p>Price: ${product.price}</p>
-            <Link to={`/product/${product._id}`}>View Details</Link>
+          <div className="product-card" key={product._id}>
+            <img src={product.image} alt={product.product_name} className="product-image" />
+            <div className="product-details">
+              <h2 className="product-name">{product.product_name}</h2>
+              <p className="product-price">Price: ${product.price}</p>
+              <Link to={`/product/${product._id}`} className="product-link">View Details</Link>
+            </div>
           </div>
         ))}
       </div>
