@@ -22,10 +22,15 @@ function Home() {
       <div className="product-grid">
         {products.map(product => (
           <div className="product-card" key={product._id}>
+             {console.log("Image URL:", product.image)}
             <img src={product.image} alt={product.product_name} className="product-image" />
             <div className="product-details">
               <h2 className="product-name">{product.product_name}</h2>
-              <p className="product-price">Price: ${product.price}</p>
+              {product.price > 0 ? (
+                <p className="product-price">Price: ${product.price}</p>
+              ) : (
+                <p className="free-product">Mannat Sar jhuka ke mangi jati</p>
+              )}
               <Link to={`/product/${product._id}`} className="product-link">View Details</Link>
             </div>
           </div>
