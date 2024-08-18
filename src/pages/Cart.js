@@ -5,7 +5,7 @@ function Cart() {
   const [cartItems, setCartItems] = useState([]);
 
   useEffect(() => {
-    axios.get('/user/cart')
+    axios.get('http://localhost:8000/user/cart')
       .then(response => {
         setCartItems(response.data.usercart);
       })
