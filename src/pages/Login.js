@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './Login.css'; // Import a CSS file for styling
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
   const [messageType, setMessageType] = useState('');
-
+  const navigate = useNavigate(); // Initialize useNavigate
   const handleSubmit = (e) => {
     e.preventDefault();
     setMessage(''); // Clear previous messages
@@ -16,6 +17,7 @@ function Login() {
       .then(response => {
         setMessage('Login successful!');
         setMessageType('success');
+        navigate('/');
         // Optionally redirect or perform other actions
       })
       .catch(error => {
